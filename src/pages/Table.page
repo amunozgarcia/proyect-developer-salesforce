@@ -1,0 +1,77 @@
+<!--
+ - Created by aure.munoz on 08/02/2017.
+ -->
+<apex:page id="Table" showheader="false"  controller="TableController">
+
+    <head>
+        <title>Prueba</title>
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css" />
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/dataTables.semanticui.min.css" />
+        <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.4.js" />
+        <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" />
+        <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.13/js/dataTables.semanticui.min.js" />
+        <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js" />
+        <!--https://cdn.datatables.net/1.10.13/js/dataTables.semanticui.min.js-->
+        <!--//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js-->
+        <script>
+        $(document).ready(function() {
+
+
+            var dataTable;
+            var table = $('#example');
+
+            //compruebo si la tabla tiene contenido para destruir los datos y reinicializarlos
+            function isEmptyDataTable()
+            {
+                if (dataTable != null){
+                    dataTable.destroy();
+                    table.empty();
+                }
+            }
+
+            $('#boton').on('click', function(){
+
+                Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.TableController.result}',
+                    function(result, event){
+                        if (event.status) {
+
+                            var obj = result['RESULT'];
+
+                            for (var prop in obj) {
+                              console.log(prop);
+                            }
+                            //log consola
+                            console.log(result);
+                            isEmptyDataTable();
+                            //dataTable.destroy();
+                            //$('#example').empty();
+                            //pinto la cabecera
+                            table.html(result['THEAD']);
+                            //pinto tabla
+                            dataTable = table.DataTable( {
+                              "language": {
+                                "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
+                              } ,
+                                "processing": true,
+                                "data": result['RESULT'],
+                                "columns": result['COLUMNS'],
+                                "retrieve": true
+                            });
+                        }
+                    },
+                    {escape: false, buffer: false,timeout: 120000}
+                );
+            });
+
+
+        });
+       </script>
+    </head>
+    <body>
+        <div id="boton" class="btn">Botón</div>
+
+        <table id="example" class="ui celled table" cellspacing="0" width="100%">
+        </table>
+
+    </body>
+</apex:page>

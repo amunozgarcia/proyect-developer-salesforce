@@ -1,0 +1,23 @@
+<apex:page id="Table" showheader="false"  controller="TableController">
+
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.4.js" />
+
+    <script>
+        $(document).ready(function() {
+
+            var a = 0;
+
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.TableController.testData}',
+                function(result, event){
+                    if (event.status) {
+                        //log consola
+                        console.log(result);
+
+                    }
+                },
+                {escape: false, buffer: false,timeout: 120000}
+            );
+        });
+    </script>
+
+</apex:page>

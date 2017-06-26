@@ -1,0 +1,19 @@
+<apex:page id="PruebaView" controller="PruebaController">
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.4.js" />
+
+    <apex:pageBlock id="contactList" title="Pagina de ventas">
+
+        <apex:pageBlockTable var="con" value="{!ventas}" >
+            <apex:column headerValue="Name">
+                <apex:outputLink value="/{!con.id}">{!con.Name}</apex:outputLink>
+            </apex:column>
+            <apex:column value="{!con.Name__c}"/>
+            <apex:column rendered="true" value="{!con.Locations__c}"/>
+            <apex:column value="{!con.State__c}"/>
+            <apex:column title="Vendedor" value="{!con.Vendedor__r.Name}"/>
+            <apex:column title="Vendedor" value="{!con.Account__r.Name}"/>
+        </apex:pageBlockTable>
+
+    </apex:pageBlock>
+
+</apex:page>
