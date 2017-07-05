@@ -9,7 +9,7 @@ global with sharing class MyPost {
 
     @HttpGet
     global static String doGet() {
-
+        //global get h
         return 'Get';
     }
 

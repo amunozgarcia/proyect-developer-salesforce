@@ -531,9 +531,8 @@ public with sharing class TableController {
 
             filas.add(fila);
         }
+        //debug filas
         System.debug(filas);
-
-
 
         //recorro las asignaciones para crear las columnas
         for (String ass : mapAssigment.keySet()) {
@@ -549,7 +548,7 @@ public with sharing class TableController {
         ob.put('RESULT', filas);
         //añado las columnas
         ob.put('COLUMNS',columns);
-        //
+        //thead
         ob.put('THEAD',htmlThead);
 
         return ob;

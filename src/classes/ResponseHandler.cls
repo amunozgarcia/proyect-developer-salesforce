@@ -6,13 +6,10 @@ global class ResponseHandler {
     public String Message {get;set;}
     public String ErrorCode {get; set;}
 
-
-
     //Check if Object is NULL or Blank
     global static boolean isNotNullOrEmpty(string str)
     {
         return str!=null || !String.isBlank(str);
-
     }
 
 
