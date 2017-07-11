@@ -29,6 +29,7 @@
                 }
             }
 
+            //on click
             $('#boton').on('click', function(){
 
                 Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.TableController.result}',

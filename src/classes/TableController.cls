@@ -531,7 +531,7 @@ public with sharing class TableController {
 
             filas.add(fila);
         }
-        //debug filas
+        //debug filas prueba 2
         System.debug(filas);
 
         //recorro las asignaciones para crear las columnas
